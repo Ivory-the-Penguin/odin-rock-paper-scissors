@@ -1,0 +1,40 @@
+* {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  padding: 20px;
+}
+
+#buttons {
+  display: flex;
+  gap: 20px;
+}
+
+button {
+  background-color: lightskyblue;
+  color: white;
+  font-size: 20px;
+  border: 0px;
+  padding: 10px 20px;
+  border-radius: 30px;
+
+  box-shadow: var(--shadow-md);
+}
+
+button:hover {
+  background-color: white;
+  color: lightskyblue;
+  outline: lightskyblue solid 2px;
+}
+
+button:active {
+  background-color: lightskyblue;
+  color: white;
+  outline: none;
+}
