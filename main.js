@@ -15,7 +15,7 @@ function sleep(time) {
 function resetGame() {
   playerChoice = null;
   messages.innerHTML = "";
-  document.querySelector("footer h2").innerHTML =
+  document.querySelector("footer h2").textContent =
     `Player: ${scores.player}, Computer: ${scores.computer}`;
 }
 
@@ -38,28 +38,28 @@ async function playout() {
       break;
   }
 
-  messages.appendChild(document.createElement("h2")).innerHTML =
+  messages.appendChild(document.createElement("h2")).textContent =
     `The Computer chose ${computerChoice}`;
 
   await sleep(1000);
 
   if (computerChoice == playerChoice) {
-    messages.appendChild(document.createElement("h2")).innerHTML = "Tie!";
+    messages.appendChild(document.createElement("h2")).textContent = "Tie!";
   } else if (
     (computerChoice == "Rock" && playerChoice == "Scissors") ||
     (computerChoice == "Scissors" && playerChoice == "Paper") ||
     (computerChoice == "Paper" && playerChoice == "Rock")
   ) {
-    messages.appendChild(document.createElement("h2")).innerHTML =
+    messages.appendChild(document.createElement("h2")).textContent =
       "The Computer wins!";
     scores.computer += 1;
   } else {
-    messages.appendChild(document.createElement("h2")).innerHTML =
+    messages.appendChild(document.createElement("h2")).textContent =
       "The Player wins!";
     scores.player += 1;
   }
 
-  await sleep(2000);
+  await sleep(1000);
   resetGame();
 }
 
