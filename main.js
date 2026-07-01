@@ -66,9 +66,11 @@ async function playout() {
   const winner = getWinner(computerChoice, playerChoice);
   createMessage(winner == "Tie" ? "Tie!" : `The ${winner} wins!`);
 
-  await sleep(1000);
-
-  resetGame();
+  const resetButton = messages.appendChild(document.createElement("button"));
+  resetButton.textContent = "Reset";
+  resetButton.onclick = () => {
+    resetGame();
+  };
 }
 
 buttons.forEach((button) => {
