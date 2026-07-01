@@ -60,7 +60,7 @@ function getWinner(computerChoice, playerChoice) {
   return "Player";
 }
 
-async function playout() {
+async function playRound() {
   createMessage(`The Player chose ${playerChoice}`);
 
   await sleep(1000);
@@ -89,7 +89,7 @@ buttons.forEach((button) => {
   button.onclick = () => {
     if (playerChoice === null) {
       playerChoice = button.textContent;
-      playout();
+      playRound();
     }
   };
 });
