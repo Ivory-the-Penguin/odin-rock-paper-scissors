@@ -3,6 +3,11 @@ const messages = document.querySelector(".messages");
 
 let playerChoice;
 
+const scores = {
+  player: 0,
+  computer: 0,
+};
+
 function sleep(time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
@@ -10,6 +15,8 @@ function sleep(time) {
 function resetGame() {
   playerChoice = null;
   messages.innerHTML = "";
+  document.querySelector("footer h2").innerHTML =
+    `Player: ${scores.player}, Computer: ${scores.computer}`;
 }
 
 async function playout() {
@@ -38,10 +45,21 @@ async function playout() {
 
   if (computerChoice == playerChoice) {
     messages.appendChild(document.createElement("h2")).innerHTML = "Tie!";
+  } else if (
+    (computerChoice == "Rock" && playerChoice == "Scissors") ||
+    (computerChoice == "Scissors" && playerChoice == "Paper") ||
+    (computerChoice == "Paper" && playerChoice == "Rock")
+  ) {
+    messages.appendChild(document.createElement("h2")).innerHTML =
+      "The Computer wins!";
+    scores.computer += 1;
+  } else {
+    messages.appendChild(document.createElement("h2")).innerHTML =
+      "The Player wins!";
+    scores.player += 1;
   }
 
-  await sleep(1000);
-
+  await sleep(2000);
   resetGame();
 }
 
