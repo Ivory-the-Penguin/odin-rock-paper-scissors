@@ -12,6 +12,12 @@ function sleep(time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
 
+function createMessage(text) {
+  const message = messages.appendChild(document.createElement("h2"));
+  message.textContent = text;
+  return message;
+}
+
 function resetGame() {
   playerChoice = null;
   messages.innerHTML = "";
@@ -19,47 +25,49 @@ function resetGame() {
     `Player: ${scores.player}, Computer: ${scores.computer}`;
 }
 
-async function playout() {
-  messages.appendChild(document.createElement("h2")).innerText =
-    `The Player chose ${playerChoice}`;
-
-  await sleep(1000);
-
-  var computerChoice;
+function getComputerChoice() {
   switch (Math.floor(Math.random() * 3)) {
     case 0:
-      computerChoice = "Rock";
-      break;
+      return "Rock";
     case 1:
-      computerChoice = "Paper";
-      break;
+      return "Paper";
     case 2:
-      computerChoice = "Scissors";
-      break;
+      return "Scissors";
+  }
+}
+
+function getWinner(computerChoice, playerChoice) {
+  if (computerChoice == playerChoice) {
+    return "Tie";
   }
 
-  messages.appendChild(document.createElement("h2")).textContent =
-    `The Computer chose ${computerChoice}`;
-
-  await sleep(1000);
-
-  if (computerChoice == playerChoice) {
-    messages.appendChild(document.createElement("h2")).textContent = "Tie!";
-  } else if (
+  if (
     (computerChoice == "Rock" && playerChoice == "Scissors") ||
     (computerChoice == "Scissors" && playerChoice == "Paper") ||
     (computerChoice == "Paper" && playerChoice == "Rock")
   ) {
-    messages.appendChild(document.createElement("h2")).textContent =
-      "The Computer wins!";
-    scores.computer += 1;
-  } else {
-    messages.appendChild(document.createElement("h2")).textContent =
-      "The Player wins!";
-    scores.player += 1;
+    return "Computer";
   }
 
+  return "Player";
+}
+
+async function playout() {
+  createMessage(`The Player chose ${playerChoice}`);
+
   await sleep(1000);
+
+  const computerChoice = getComputerChoice();
+
+  createMessage(`The Computer chose ${computerChoice}`);
+
+  await sleep(1000);
+
+  const winner = getWinner(computerChoice, playerChoice);
+  createMessage(winner == "Tie" ? "Tie!" : `The ${winner} wins!`);
+
+  await sleep(1000);
+
   resetGame();
 }
 
