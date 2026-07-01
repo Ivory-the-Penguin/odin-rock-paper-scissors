@@ -23,6 +23,14 @@ function resetGame() {
   messages.innerHTML = "";
   document.querySelector("footer h2").textContent =
     `Player: ${scores.player}, Computer: ${scores.computer}`;
+
+  if (scores.computer == 5 || scores.player == 5) {
+    document.body.innerHTML = "";
+    const message = document.body.appendChild(document.createElement("h1"));
+    message.className = "winner";
+
+    message.textContent = `The ${scores.computer == 5 ? "Computer" : "Player"} wins!`;
+  }
 }
 
 function getComputerChoice() {
