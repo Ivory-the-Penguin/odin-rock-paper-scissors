@@ -38,3 +38,12 @@ button:active {
   color: white;
   outline: none;
 }
+
+footer {
+  position: fixed;
+  top: 95vh;
+}
+
+h2 {
+  margin: 20px 0px;
+}
